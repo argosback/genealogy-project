@@ -2,9 +2,12 @@ var JsonMaker = require("../models/JsonMaker");
 
 
 exports.Tree= function(req,res){
-	res.pageInfo={};
-	res.pageInfo.title= 'Tree View';
-	var json=JsonMaker.generate();
-	res.pageInfo.data=json;
-	res.render('tree/tree',res.pageInfo);
+	console.log("tree() \n");
+	return JsonMaker.generate(req,res);
+}
+
+
+exports.RenderTree = function(req,res,data){
+	console.log('render() \n');
+	res.render("tree/tree",data);
 }

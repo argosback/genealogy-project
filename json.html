@@ -1,0 +1,62 @@
+<html>
+   <head>
+      <title>Experiment</title>
+      <script type="text/javascript">
+         /* initial structure */
+         var struct = [
+            {
+                "id": 1,
+                "children": [{
+                    "id": 2,
+                    "children": [{
+                        "id": 3
+                    }, {
+                        "id": 4
+                    }]
+                }, {
+                    "id": 5
+                }]
+            }
+         ];
+
+         function experiment() {
+            /* stores all results */
+            var all = [];
+
+            /* kick off the recursive method */
+            handleNode(struct[0], 0, all);
+
+            /* print the results to browser debugger console*/
+            console.log(all);
+         }
+
+         function handleNode(node, previousLeft, all) {
+            /* create and store the new entry (bucket to put left, right, and id ) */
+            var indexed = {};
+            all.push(indexed);
+
+            indexed.id = node["id"];
+            indexed.left = previousLeft + 1;
+
+            var lastRight = indexed.left;
+            /* here we do the recursion for every child */
+            for (var x in node["children"]) {
+               lastRight = handleNode(node["children"][x], lastRight, all);
+            }
+
+            /* once all children have been iterated over we can store the rigth */
+            indexed.right = lastRight + 1;
+
+            /* return the newly updated right for this bucket */
+            return indexed.right;
+         }
+
+         /* run the experiment */
+         experiment();
+
+      </script>
+   </head>
+   <body>
+
+   </body>
+</html>
